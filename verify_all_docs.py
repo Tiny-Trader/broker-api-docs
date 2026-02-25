@@ -135,9 +135,66 @@ async def verify_kite():
             print(f"   ⚠️  MISSING: {section}")
 
 
+async def verify_upstox():
+    """Verify Upstox Open API scraping."""
+    print("\n" + "=" * 60)
+    print("UPSTOX OPEN API VERIFICATION")
+    print("=" * 60)
+    
+    # Known sections from the site
+    expected_sections = {
+        'open-api', 'authentication', 'orders', 'gtt-orders', 'portfolio',
+        'market-quote', 'market-information', 'historical-data', 'instruments',
+        'option-chain', 'margins', 'charges', 'trade-profit-and-loss', 'user',
+        'login', 'rate-limiting', 'request-response', 'sdk',
+        'uplink-business', 'mcp-integration', 'sandbox',
+        'expired-instruments', 'announcements', 'appendix'
+    }
+    
+    # Get scraped directories
+    scraped_dir = Path("output/upstox-open-api")
+    scraped_pages = set()
+    if scraped_dir.exists():
+        for item in scraped_dir.iterdir():
+            if item.is_dir():
+                scraped_pages.add(item.name.lower().replace('-', ''))
+    
+    print(f"\n📄 Expected sections: {len(expected_sections)}")
+    
+    print(f"\n📁 Scraped directories: {len([d for d in scraped_dir.iterdir() if d.is_dir()])}")
+    for p in sorted(scraped_dir.iterdir()):
+        if p.is_dir():
+            print(f"   ✓ {p.name}")
+    
+    # Compare
+    expected_normalized = {s.lower().replace('-', '') for s in expected_sections}
+    
+    missing = expected_normalized - scraped_pages
+    extra = scraped_pages - expected_normalized
+    
+    print("\n📊 Comparison:")
+    if not missing:
+        print("   ✅ ALL PAGES SCRAPED!")
+    else:
+        print(f"   ⚠️  Missing: {missing}")
+    
+    if extra:
+        print(f"   ℹ️  Extra: {extra}")
+    
+    # Content stats
+    total_lines = 0
+    for md_file in scraped_dir.rglob("*.md"):
+        total_lines += len(md_file.read_text().splitlines())
+    
+    print(f"\n📈 Content stats:")
+    print(f"   Total lines: {total_lines:,}")
+    print(f"   Files: {len(list(scraped_dir.rglob('*.md')))}")
+
+
 async def main():
     verify_angel_one()
     await verify_kite()
+    await verify_upstox()
     
     print("\n" + "=" * 60)
     print("VERIFICATION COMPLETE")
