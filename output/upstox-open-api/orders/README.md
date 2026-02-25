@@ -1,0 +1,16 @@
+---
+source: https://upstox.com/developer/api-documentation/orders
+scraped: true
+---
+  * [](https://upstox.com/developer/api-documentation/)
+
+# Orders
+  * If you represent a business aiming to incorporate order flow management (including placing, canceling, and modifying orders), please visit the [Uplink Business](https://upstox.com/developer/api-documentation/uplink-business/introduction). The direct HTTP order placement API integration is intended for individual API users.
+
+  * In adherence to CDSL regulations, customers without a DDPI/POA are obligated to use a combination of the CDSL TPIN and OTP to provide the necessary authorization for the deduction of securities from their demat account when engaging in delivery sale transactions.
+
+## [ description Place Order V3 Place a slicing order with all possible configurations.](https://upstox.com/developer/api-documentation/v3/place-order)## [ description Place Multi Order Place multiple orders with all possible combinations.](https://upstox.com/developer/api-documentation/place-multi-order)## [ description Modify Order V3 Modify pending or open orders.](https://upstox.com/developer/api-documentation/v3/modify-order)## [ description Cancel Order V3 Cancel pending or open orders.](https://upstox.com/developer/api-documentation/v3/cancel-order)## [ description Cancel Multi Order Cancel all the open orders which can be applied to both AMO and regular orders.](https://upstox.com/developer/api-documentation/cancel-multi-order)## [ description Exit All Positions Exit all the open positions.](https://upstox.com/developer/api-documentation/exit-all-positions)## [ description Get Order Details Get the latest status and details for an order.](https://upstox.com/developer/api-documentation/get-order-details)## [ description Get Order History Get order history for an order.](https://upstox.com/developer/api-documentation/get-order-history)## [ description Get Order Book Get the list of all orders placed during the day.](https://upstox.com/developer/api-documentation/get-order-book)## [ description Get Trades Get the list of all trades for the day.](https://upstox.com/developer/api-documentation/get-trade-history)## [ description Get Order Trades Get the list of trades executed for an order.](https://upstox.com/developer/api-documentation/get-trades-by-order)## [ description Get Trade History Get the list of historical trades](https://upstox.com/developer/api-documentation/get-historical-trades)## [ description Place Order Place a single order with all possible configurations.](https://upstox.com/developer/api-documentation/place-order)## [ description Modify Order Modify pending or open orders.](https://upstox.com/developer/api-documentation/modify-order)## [ description Cancel Order Cancel pending or open orders.](https://upstox.com/developer/api-documentation/cancel-order)
+[Previous Margin Details](https://upstox.com/developer/api-documentation/margin)[Next Place Order V3](https://upstox.com/developer/api-documentation/v3/place-order)
+[Contact us](https://upstox.com/contact-us/)·[About us](https://upstox.com/about/)·[FAQ](https://help.upstox.com/support/solutions/folders/278252)·[API Community](https://community.upstox.com/c/developer-api/15)
+Made with ❤️ in India | Copyright © 2026, Upstox. Built with
+
