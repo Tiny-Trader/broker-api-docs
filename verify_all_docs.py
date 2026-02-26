@@ -191,10 +191,67 @@ async def verify_upstox():
     print(f"   Files: {len(list(scraped_dir.rglob('*.md')))}")
 
 
+async def verify_groww():
+    """Verify Groww Trade API scraping."""
+    print("\n" + "=" * 60)
+    print("GROWW TRADE API VERIFICATION")
+    print("=" * 60)
+    
+    # Known sections from the site
+    expected_sections = {
+        'python-sdk', 'orders', 'smart-orders', 'portfolio', 'margin',
+        'live-data', 'historical-data', 'backtesting', 'feed', 'instruments',
+        'user', 'annexures', 'exceptions', 'changelog',
+        'curl'
+    }
+    
+    # Get scraped directories
+    scraped_dir = Path("output/groww-trade-api")
+    scraped_pages = set()
+    if scraped_dir.exists():
+        for item in scraped_dir.iterdir():
+            if item.is_dir():
+                scraped_pages.add(item.name.lower().replace('-', ''))
+                # Also check subdirectories
+                for subitem in item.iterdir():
+                    if subitem.is_dir():
+                        scraped_pages.add(f"{item.name}/{subitem.name}".lower().replace('-', ''))
+    
+    print(f"\n📄 Expected sections: {len(expected_sections)}")
+    
+    print(f"\n📁 Scraped structure:")
+    for p in sorted(scraped_dir.iterdir()):
+        if p.is_dir():
+            print(f"   ✓ {p.name}/")
+            for sub in sorted(p.iterdir()):
+                if sub.is_dir():
+                    print(f"      └── {sub.name}/")
+    
+    # Content stats
+    total_lines = 0
+    for md_file in scraped_dir.rglob("*.md"):
+        total_lines += len(md_file.read_text().splitlines())
+    
+    print(f"\n📈 Content stats:")
+    print(f"   Total lines: {total_lines:,}")
+    print(f"   Files: {len(list(scraped_dir.rglob('*.md')))}")
+    
+    # Check key sections exist
+    print(f"\n🔑 Key sections check:")
+    key_sections = ['orders', 'portfolio', 'live-data', 'margin']
+    for section in key_sections:
+        found = any(section in str(p).lower() for p in scraped_dir.rglob('*.md'))
+        if found:
+            print(f"   ✓ {section}")
+        else:
+            print(f"   ⚠️  MISSING: {section}")
+
+
 async def main():
     verify_angel_one()
     await verify_kite()
     await verify_upstox()
+    await verify_groww()
     
     print("\n" + "=" * 60)
     print("VERIFICATION COMPLETE")
