@@ -9,8 +9,9 @@ A collection of Crawl4AI-based scrapers to download and maintain offline copies 
 | **Kite Connect v3** (Zerodha) | 18 | ~4,700 | ✅ Complete |
 | **Angel One SmartAPI** | 19 | ~161,740 | ✅ Complete |
 | **Upstox Open API** | 24 | ~1,200 | ✅ Complete |
+| **Groww Trade API** | 27 | ~6,200 | ✅ Complete |
 
-**Total:** 61 files, ~167,640 lines of documentation
+**Total:** 88 files, ~173,840 lines of documentation
 
 ---
 
@@ -30,11 +31,18 @@ output/
 │   ├── Gtt/README.md
 │   └── ... (19 sections)
 │
-└── upstox-open-api/          # Upstox
-    ├── orders/README.md
-    ├── gtt-orders/README.md
-    ├── authentication/README.md
-    └── ... (24 sections)
+├── upstox-open-api/          # Upstox
+│   ├── orders/README.md
+│   ├── gtt-orders/README.md
+│   ├── authentication/README.md
+│   └── ... (24 sections)
+│
+└── groww-trade-api/          # Groww
+    ├── python-sdk/orders/README.md
+    ├── python-sdk/smart-orders/README.md
+    ├── python-sdk/portfolio/README.md
+    ├── curl/orders/README.md
+    └── ... (27 sections)
 ```
 
 ---
@@ -86,9 +94,11 @@ python verify_all_docs.py
 | `kite_crawler.py` | Scrape Kite Connect docs | Zerodha |
 | `angel_crawler.py` | Scrape Angel One docs | Angel Broking |
 | `upstox_crawler.py` | Scrape Upstox docs | Upstox |
+| `groww_crawler.py` | Scrape Groww docs | Groww |
 | `clean_docs.py` | Clean Kite markdown | Zerodha |
 | `clean_angel_docs.py` | Clean Angel markdown | Angel Broking |
 | `clean_upstox_docs.py` | Clean Upstox markdown | Upstox |
+| `clean_groww_docs.py` | Clean Groww markdown | Groww |
 | `verify_all_docs.py` | Verify completeness | All |
 
 ---
@@ -102,11 +112,13 @@ python verify_all_docs.py
 python kite_crawler.py
 python angel_crawler.py
 python upstox_crawler.py
+python groww_crawler.py
 
 # Clean all
 python clean_docs.py
 python clean_angel_docs.py
 python clean_upstox_docs.py
+python clean_groww_docs.py
 
 # Verify
 python verify_all_docs.py
@@ -123,11 +135,13 @@ git commit -m "Refresh all broker docs - $(date +%Y-%m-%d)"
 rm -rf output/kite-connect-v3
 rm -rf output/angel-one-smartapi
 rm -rf output/upstox-open-api
+rm -rf output/groww-trade-api
 
 # Re-scrape from scratch
 python kite_crawler.py && python clean_docs.py
 python angel_crawler.py && python clean_angel_docs.py
 python upstox_crawler.py && python clean_upstox_docs.py
+python groww_crawler.py && python clean_groww_docs.py
 ```
 
 ---
@@ -185,16 +199,18 @@ To scrape a new broker's documentation:
 
 ### Common Sections Across Brokers:
 - ✅ Authentication & Login
-- ✅ Orders (Regular, GTT, AMO, CO)
+- ✅ Orders (Regular, GTT, AMO, CO, Smart Orders)
 - ✅ Portfolio & Holdings
 - ✅ Market Data & Quotes
 - ✅ Historical Data
 - ✅ User Profile & Funds
 - ✅ Margins & Charges
-- ✅ WebSocket Streaming
+- ✅ WebSocket Streaming / Feed
 - ✅ Rate Limiting
-- ✅ Error Codes
+- ✅ Error Codes & Exceptions
 - ✅ SDKs & Libraries
+- ✅ Instruments & Symbols
+- ✅ Backtesting (Groww)
 
 ---
 
@@ -221,6 +237,7 @@ For production use, always refer to official documentation:
 - [Kite Connect](https://kite.trade/docs/connect/v3/)
 - [Angel One SmartAPI](https://smartapi.angelbroking.com/docs)
 - [Upstox Open API](https://upstox.com/developer/api-documentation/open-api)
+- [Groww Trade API](https://groww.in/trade-api/docs)
 
 ---
 
